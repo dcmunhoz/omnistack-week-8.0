@@ -1,2 +1,2 @@
-# omnistack-week-8.0
-Repositório para acompanhar os dias da Semana OmniStack 8.0
+# Semana OmniStack 8.0
+Repositório para acompanhar as aulas da [Semana OmniStack 8.0](https://rocketseat.com.br/week-8/inscricao)
