@@ -1,9 +1,33 @@
-const axios = require('axios');
-const Dev   = require('../models/Dev');
+const axios = require('axios');         // Lib Axios para requisições AJAX
+const Dev   = require('../models/Dev'); // Model do Dev
 
 // Controller de um Dev
 module.exports = {
 
+    // Retorna a lista de todos os usuários
+    async index(req, res){
+
+        // Pega o usuário logado.
+        const { user } = req.headers;
+
+        // Busca o usuário logado no banco.
+        const loggedDev = await Dev.findById(user);
+
+        // Pesquisa no mongodb os Devs de acordo com os filtros 
+        const users = await Dev.find({
+            $and: [
+                { _id: { $ne: user } },                 // Não pode ser o usuário logado
+                { _id: { $nin: loggedDev.likes } },     // Não pode estar na lista de likes
+                { _id: { $nin: loggedDev.dislikes } }   // Não pode estar na lista de dislikes
+            ]
+        });
+
+        // Retorna a lista de Devs
+        return res.json(users);
+
+    },
+
+    // Salva um Dev no banco
     async store(req, res) {
 
         // Parametro passado pelo POST
