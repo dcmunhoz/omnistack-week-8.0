@@ -1,6 +1,6 @@
-const express = require('express');
-
-const routes = express.Router();
+const express = require('express'); // Express
+const Dev     = require('./controllers/DevController');
+const routes  = express.Router();    // Router express.
 
 // Principais metodos HTTP:
 // GET, POST, PUT, DELETE
@@ -13,9 +13,7 @@ routes.get('/', (req, res) => {
 
 });
 
-routes.post('/devs', (req, res) => {
-    return res.json(req.body);
-});
+routes.post('/devs', Dev.store);
 
 
 module.exports = routes;
